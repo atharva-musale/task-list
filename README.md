@@ -1,27 +1,67 @@
-# TaskList
+# Task list app
+Todo list app helps you keep track of the tasks that you have to do.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
+## Prerequisites
 
-## Development server
+Before  you start using the application, please make sure to install the following products on your development machine:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* [Node.js](https://nodejs.org/en/download/), (latest version).
+* [Git](https://git-scm.com/downloads), (latest version).
 
-## Code scaffolding
+## Getting the sources
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Get the sources by forking and cloning the refx-booking repository:
 
-## Build
+1. On Github, you can find task-list repository [here](https://github.com/atharva-musale/task-list.git).
+2. Clone **original `task-list` repository** on your local machine.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```shell
+# Clone the git repository:
+git clone https://github.com/atharva-musale/task-list.git
 
-## Running unit tests
+# Go to the refx-booking directory:
+cd task-list
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installing dependencies
 
-## Running end-to-end tests
+```shell
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Building app
 
-## Further help
+You can use following commands to build:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```shell
+ng build       # dev build
+ng build:prod  # prod build
+```
+
+In order to make sure you respect formatting, start the lint command:
+```shell
+npm run lint
+```
+
+## Running app locally for development purposes
+###For development:
+
+1) Clone the repository
+
+2) Install dependencies in **`task-list`**:
+```shell
+yarn install
+```
+
+After [installing dependencies](#installing-dependencies), use start script to build and start the watch mode.
+```shell
+ng serve
+```
+
+## Launching test
+
+During the development, you will have to write unit tests and to run them you can launch the following command:
+
+```shell
+ ng test
+```
