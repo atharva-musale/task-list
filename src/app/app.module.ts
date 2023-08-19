@@ -6,6 +6,7 @@ import { BasicLayoutComponent } from './components/basic-layout/basic-layout.com
 import { TaskComponent } from './components/task/task.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskInputComponent } from './components/task-input/task-input.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TaskInputComponent } from './components/task-input/task-input.component
     TaskInputComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
