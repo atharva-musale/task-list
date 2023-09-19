@@ -1,10 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use './app/style-utilities/variables' as colors;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Poppins:wght@100;200;400;500;600;700;800;900&display=swap');
+
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  font-family: 'Josefin Sans', sans-serif;
+  height: 100%;
+}
+
+// custom styles for inputs
+input[type="text"], input[type="text"]:focus {
+  font-family: 'Josefin Sans', sans-serif;
+  caret-color: colors.$bright-blue;
+  color: colors.$font-color;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  width: 1.6rem;
+  height: 1.6rem;
+  visibility: hidden;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  position: absolute;
+  background-color: colors.$grayish-blue-300;
+  border: 1px solid colors.$grayish-blue-100;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 1.6rem;
+  height: 1.6rem;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, 45%);
+  transition: all 0.2s ease-in-out;
+  visibility: visible;
+}
+
+input[type="checkbox"]:checked:before {
+  background-image: colors.$check-background;
+  border-color: none;
+}
+
+input[type="checkbox"]::after {
+  content: "";
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  width: 0.8rem;
+  height: 0.4rem;
+  top: 7px;
+  left: 6px;
+  position: absolute;
+  transform: rotate(-45deg);
+  visibility: none;
+}
+
+input[type="checkbox"]:checked:after {
+  visibility: visible;
+}

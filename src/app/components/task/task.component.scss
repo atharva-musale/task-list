@@ -1,0 +1,17 @@
+@use '../../style-utilities/variables' as colors;
+
+.input-container {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background-color: colors.$inputs-background;
+
+  .text-input {
+    flex-basis: 80%;
+    flex-grow: 1;
+    font-size: 1.4rem;
+  }
+}

@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+ ChangeDetectionStrategy,
+ Component,
+ ViewEncapsulation,
+} from '@angular/core';
+import {
+ TaskService,
+} from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-task-input',
@@ -7,11 +14,24 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskInputComponent implements OnInit {
+export class TaskInputComponent {
+  /**
+   * Title of the task
+   */
+  public taskTitle = '';
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
-  ngOnInit(): void {
+  /**
+   * To be triggered on pressing a key
+   *
+   * @param event keyboard event
+   */
+  public onKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.taskService.addTask(this.taskTitle);
+      this.taskTitle = "";
+    }
   }
 
 }

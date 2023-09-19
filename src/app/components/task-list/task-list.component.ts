@@ -1,4 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+ Observable,
+} from 'rxjs';
+import {
+  Task,
+} from '../../models';
+import {
+ TaskService,
+} from '../../services/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -9,7 +23,14 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 })
 export class TaskListComponent implements OnInit {
 
-  constructor() { }
+  /**
+   * List of tasks
+   */
+  public tasks$: Observable<Task[]>;
+
+  constructor(private taskService: TaskService) {
+    this.tasks$ = this.taskService.tasks$;
+  }
 
   ngOnInit(): void {
   }

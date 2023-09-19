@@ -1,0 +1,26 @@
+@use '../../style-utilities/variables' as colors;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  .heading {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 15px;
+  }
+
+  .mode-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+.footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: colors.$grayish-blue-200;
+}

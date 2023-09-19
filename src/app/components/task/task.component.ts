@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+ Task,
+} from '../../models';
 
 @Component({
   selector: 'app-task',
@@ -8,6 +17,11 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskComponent implements OnInit {
+  /**
+   * Task
+   */
+  @Input()
+  public task?: Task;
 
   constructor() { }
 

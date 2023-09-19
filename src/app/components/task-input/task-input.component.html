@@ -1,1 +1,4 @@
-<p>task-input works!</p>
+<form class="input-container">
+  <input class="checkbox-input" type="checkbox" disabled>
+  <input class="text-input" type="text" name="task-input" [(ngModel)]="taskTitle" (keypress)="onKeyPress($event)" placeholder="Enter task">
+</form>
