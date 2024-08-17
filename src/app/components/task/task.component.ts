@@ -5,8 +5,15 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  isTaskCompleted,
+} from '../../helpers';
+import {
   Task,
+  TaskStatus,
 } from '../../models';
+import {
+  TaskService,
+} from '../../services';
 
 @Component({
   selector: 'app-task',
@@ -21,4 +28,16 @@ export class TaskComponent {
    */
   @Input()
   public task?: Task;
+
+  isTaskCompleted = isTaskCompleted;
+
+  constructor(private taskService: TaskService) {}
+
+  public checkboxChangeEvent(event: any) {
+    if (!this.task) return;
+    this.taskService.updateTaskStatus(
+      this.task,
+      event.currentTarget.checked ? TaskStatus.COMPLETED : TaskStatus.ACTIVE
+    );
+  }
 }

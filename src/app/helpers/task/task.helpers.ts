@@ -13,3 +13,11 @@ export function getFilteredTasks(tasks: Task[], filterBy: FilterStatus): Task[] 
     return tasks.filter(task => task.status === TaskStatus.COMPLETED);
   }
 }
+
+export function isTaskActive(task: Task): boolean {
+  return task.status === TaskStatus.ACTIVE;
+}
+
+export function isTaskCompleted(task: Task): boolean {
+  return task.status === TaskStatus.COMPLETED;
+}

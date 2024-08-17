@@ -1,4 +1,4 @@
 <div *ngIf="task" class="input-container">
-  <input class="checkbox-input" type="checkbox">
-  <p class="text-input">{{ task.title }}</p>
+  <input class="checkbox-input" type="checkbox" (change)="checkboxChangeEvent($event)" [checked]="isTaskCompleted(task)">
+  <p class="text-input" [class.completed]="isTaskCompleted(task)">{{ task.title }}</p>
 </div>

@@ -87,8 +87,8 @@ export class TaskService {
    *
    * @param task task to be set as completed
    */
-  public markTaskAsCompleted(task: Task) {
-    this.tasks = this.tasks.map(t => t.id === task.id ? { ...t, status: TaskStatus.COMPLETED } : t);
+  public updateTaskStatus(task: Task, newStatus: TaskStatus) {
+    this.tasks = this.tasks.map(t => t.id === task.id ? { ...t, status: newStatus } : t);
     this.tasksSubject$.next(this.tasks);
   }
 
