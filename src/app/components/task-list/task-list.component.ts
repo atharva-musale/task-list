@@ -1,18 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 import {
- Observable,
+  Observable,
 } from 'rxjs';
 import {
   Task,
 } from '../../models';
 import {
- TaskService,
-} from '../../services/task.service';
+  TaskService,
+} from '../../services/task/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -21,7 +20,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent {
 
   /**
    * List of tasks
@@ -29,10 +28,6 @@ export class TaskListComponent implements OnInit {
   public tasks$: Observable<Task[]>;
 
   constructor(private taskService: TaskService) {
-    this.tasks$ = this.taskService.tasks$;
+    this.tasks$ = this.taskService.filteredTasks$;
   }
-
-  ngOnInit(): void {
-  }
-
 }

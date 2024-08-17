@@ -1,4 +1,10 @@
+@use '../../style-utilities/variables' as colors;
+
 .task-list-container {
   border-radius: 4px;
   overflow: hidden;
+
+  li {
+    border-bottom: 1px solid colors.$grayish-blue-200;
+  }
 }

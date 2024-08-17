@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
  TaskService,
-} from 'src/app/services/task.service';
+} from '../../services';
 
 @Component({
   selector: 'app-task-input',
@@ -23,7 +23,7 @@ export class TaskInputComponent {
   constructor(private taskService: TaskService) { }
 
   /**
-   * To be triggered on pressing a key
+   * Adds the task to the list on clicking enter button
    *
    * @param event keyboard event
    */

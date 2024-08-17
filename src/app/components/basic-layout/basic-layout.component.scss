@@ -1,6 +1,6 @@
 @use '../../style-utilities/variables' as colors;
 
-.header {
+header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
@@ -18,7 +18,7 @@
   }
 }
 
-.footer {
+footer {
   margin-top: 2rem;
   text-align: center;
   font-size: 0.9rem;

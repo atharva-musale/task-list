@@ -2,11 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
 import {
- Task,
+  Task,
 } from '../../models';
 
 @Component({
@@ -16,16 +15,10 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent {
   /**
    * Task
    */
   @Input()
   public task?: Task;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
