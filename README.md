@@ -1,5 +1,14 @@
 # Task list app
 Todo list app helps you keep track of the tasks that you have to do.
+There are several things that can be done in this app:
+1. To add a new task, type the new task in the textbox at the top and press enter.
+2. Once a task is added to the list, it can be marked as completed by clicking on the checkbox. This will mark the task as completed.
+3. On hovering on a task, there will be a cross on the right which will allow you to remove the task.
+4. Active and completed tasks can be filtered out by clicking on the option given on the bottom.
+5. You can drag and drop the items to change their priority.
+6. Number of items left can be seen on the bottom left.
+7. You can clear completed tasks by clicking on a button given in the right bottom of the tasks area.
+
 
 ## Prerequisites
 
@@ -10,7 +19,7 @@ Before  you start using the application, please make sure to install the followi
 
 ## Getting the sources
 
-Get the sources by forking and cloning the refx-booking repository:
+Get the sources by forking and cloning the task-list repository:
 
 1. On Github, you can find task-list repository [here](https://github.com/atharva-musale/task-list.git).
 2. Clone **original `task-list` repository** on your local machine.
@@ -29,20 +38,6 @@ cd task-list
 npm install
 ```
 
-## Building app
-
-You can use following commands to build:
-
-```shell
-ng build       # dev build
-ng build:prod  # prod build
-```
-
-In order to make sure you respect formatting, start the lint command:
-```shell
-npm run lint
-```
-
 ## Running app locally for development purposes
 ###For development:
 
@@ -50,7 +45,7 @@ npm run lint
 
 2) Install dependencies in **`task-list`**:
 ```shell
-yarn install
+npm install
 ```
 
 After [installing dependencies](#installing-dependencies), use start script to build and start the watch mode.
