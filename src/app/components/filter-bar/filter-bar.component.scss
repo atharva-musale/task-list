@@ -1,0 +1,33 @@
+@use '../../style-utilities/variables' as colors;
+
+.filter-row {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background-color: colors.$inputs-background;
+  color: colors.$font-color;
+  font-size: 1rem;
+
+  button {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem;
+    caret-color: colors.$bright-blue;
+    color: colors.$font-color;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  button:hover {
+    cursor: pointer;
+    color: colors.$bright-blue;
+    transition: ease-in-out 400ms;
+  }
+
+  .filter-button:not(:last-child) {
+    margin-right: 1rem;
+  }
+}

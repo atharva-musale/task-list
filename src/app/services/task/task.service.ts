@@ -2,11 +2,19 @@ import {
   Injectable,
 } from '@angular/core';
 import {
- BehaviorSubject,
+  BehaviorSubject,
+  combineLatest,
+  map,
+  Observable,
 } from 'rxjs';
 import {
- Task, TaskStatus,
-} from '../models';
+ getFilteredTasks,
+} from '../../helpers';
+import {
+  FilterStatus,
+  Task,
+  TaskStatus,
+} from '../../models';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +37,30 @@ export class TaskService {
    * To do operations on the tasks
    */
   private tasksSubject$ = new BehaviorSubject<Task[]>(this.tasks);
-  public tasks$ = this.tasksSubject$.asObservable();
 
-  constructor() { }
+  /** Current filter state */
+  private filterStateSubject$ = new BehaviorSubject<FilterStatus>(FilterStatus.ALL);
+  public filterState$ =this.filterStateSubject$.asObservable();
+
+  /**
+   * Filters tasks based on the state selected
+   */
+  public filteredTasks$: Observable<Task[]>
+
+  /**
+   * Number of active items
+   */
+  public numberOfActiveTasks$: Observable<Number>
+
+  constructor() {
+    this.filteredTasks$ = combineLatest([this.tasksSubject$, this.filterStateSubject$]).pipe(
+      map(([tasks, filterBy]) => getFilteredTasks(tasks, filterBy))
+    );
+
+    this.numberOfActiveTasks$ = this.tasksSubject$.pipe(
+      map(tasks => tasks.filter(task => task.status === TaskStatus.ACTIVE).length)
+    );
+  }
 
   /**
    * Adds task to the list
@@ -61,6 +90,15 @@ export class TaskService {
   public markTaskAsCompleted(task: Task) {
     this.tasks = this.tasks.map(t => t.id === task.id ? { ...t, status: TaskStatus.COMPLETED } : t);
     this.tasksSubject$.next(this.tasks);
+  }
+
+  /**
+   * Sets filtered state value
+   *
+   * @param status new status
+   */
+  public setFilterStatus(status: FilterStatus) {
+    this.filterStateSubject$.next(status);
   }
 
   /**
