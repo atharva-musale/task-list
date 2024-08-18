@@ -33,6 +33,12 @@ export class TaskComponent {
 
   constructor(private taskService: TaskService) {}
 
+  /**
+   * Updates the task status when checkbox is selected/unselected
+   *
+   * @param event on checkbox toggle
+   * @returns void
+   */
   public checkboxChangeEvent(event: any) {
     if (!this.task) return;
     this.taskService.updateTaskStatus(

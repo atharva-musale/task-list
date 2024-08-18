@@ -1,21 +1,14 @@
 @use './style-utilities/variables' as colors;
 
-.page-container {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  background-color: colors.$page-background;
-}
-
 .header-image {
   width: 100%;
-  height: 40%;
+  height: 35%;
   object-fit: cover;
 }
 
 app-basic-layout {
   position: absolute;
-  width: 37.5%;
+  width: min(80%, 50rem);
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
