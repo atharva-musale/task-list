@@ -15,7 +15,7 @@
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1rem;
     caret-color: colors.$bright-blue;
-    color: colors.$font-color;
+    color: colors.$grayish-blue-100;
     background: transparent;
     border: none;
     outline: none;
@@ -29,5 +29,20 @@
 
   .filter-button:not(:last-child) {
     margin-right: 1rem;
+  }
+
+  .selected {
+    color: colors.$bright-blue;
+  }
+}
+
+@media (max-width: 600px) {
+  .remove-in-mobile {
+    display: none;
+  }
+
+  .filter-row {
+    display: block;
+    text-align: center;
   }
 }

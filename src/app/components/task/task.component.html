@@ -1,4 +1,5 @@
 <div *ngIf="task" class="input-container">
   <input class="checkbox-input" type="checkbox" (change)="checkboxChangeEvent($event)" [checked]="isTaskCompleted(task)">
   <p class="text-input" [class.completed]="isTaskCompleted(task)">{{ task.title }}</p>
+  <button (click)="removeTask()" class="cross-button"><img src="../../../assets/icon-cross.svg" alt="cross button"></button>
 </div>

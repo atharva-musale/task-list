@@ -2,7 +2,5 @@
   <li *ngFor="let task of tasks">
     <app-task [task]="task"></app-task>
   </li>
-  <ng-container *ngIf="tasks.length">
-    <app-filter-bar></app-filter-bar>
-  </ng-container>
+  <app-filter-bar></app-filter-bar>
 </ul>

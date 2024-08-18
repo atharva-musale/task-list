@@ -46,4 +46,13 @@ export class TaskComponent {
       event.currentTarget.checked ? TaskStatus.COMPLETED : TaskStatus.ACTIVE
     );
   }
+
+  /**
+   * Removes the task from the list
+   */
+  public removeTask() {
+    if (this.task) {
+      this.taskService.removeTask(this.task);
+    }
+  }
 }

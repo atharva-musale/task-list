@@ -83,6 +83,14 @@ export class TaskService {
   }
 
   /**
+   * Clears completed tasks
+   */
+  public clearCompletedTasks() {
+    this.tasks = this.tasks.filter(task => task.status !== TaskStatus.COMPLETED);
+    this.tasksSubject$.next(this.tasks);
+  }
+
+  /**
    * Marks the given task as completed
    *
    * @param task task to be set as completed

@@ -21,7 +21,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListComponent {
-
   /**
    * List of tasks
    */

@@ -19,4 +19,17 @@
   .completed {
     text-decoration: line-through;
   }
+
+  .cross-button {
+    background-color: transparent;
+    border: none;
+    visibility: hidden;
+  }
+}
+
+.input-container:hover {
+  .cross-button {
+    visibility: visible;
+    cursor: pointer;
+  }
 }
