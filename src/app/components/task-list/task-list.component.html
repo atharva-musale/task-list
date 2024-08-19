@@ -1,6 +1,6 @@
-<ul *ngIf="tasks$ | async as tasks" class="task-list-container">
-  <li *ngFor="let task of tasks">
-    <app-task [task]="task"></app-task>
-  </li>
+<ul *ngIf="tasks$ | async as tasks" cdkDropList class="task-list-container" (cdkDropListDropped)="drop($event)">
+  @for (task of tasks; track task) {
+    <li cdkDrag><app-task [task]="task"></app-task></li>
+  }
   <app-filter-bar></app-filter-bar>
 </ul>

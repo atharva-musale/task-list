@@ -1,23 +1,26 @@
 import {
- NgModule,
+  CdkDrag, CdkDropList,
+} from '@angular/cdk/drag-drop';
+import {
+  NgModule,
 } from '@angular/core';
 import {
- FormsModule,
+  FormsModule,
 } from '@angular/forms';
 import {
- BrowserModule,
+  BrowserModule,
 } from '@angular/platform-browser';
 import {
- BrowserAnimationsModule,
+  BrowserAnimationsModule,
 } from '@angular/platform-browser/animations';
 import {
- AppComponent,
+  AppComponent,
 } from './app.component';
 import {
- BasicLayoutComponent,
- TaskComponent,
- TaskInputComponent,
- TaskListComponent,
+  BasicLayoutComponent,
+  TaskComponent,
+  TaskInputComponent,
+  TaskListComponent,
 } from './components';
 import {
   FilterBarComponent,
@@ -35,7 +38,9 @@ import {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    CdkDropList,
+    CdkDrag
   ],
   providers: [],
   bootstrap: [AppComponent]

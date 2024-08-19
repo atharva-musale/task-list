@@ -28,8 +28,8 @@
 }
 
 .input-container:hover {
+  cursor: pointer;
   .cross-button {
     visibility: visible;
-    cursor: pointer;
   }
 }

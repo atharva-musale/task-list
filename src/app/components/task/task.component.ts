@@ -29,6 +29,9 @@ export class TaskComponent {
   @Input()
   public task?: Task;
 
+  /**
+   * Checks whether a task is completed or not
+   */
   isTaskCompleted = isTaskCompleted;
 
   constructor(private taskService: TaskService) {}

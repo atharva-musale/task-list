@@ -1,10 +1,15 @@
 import {
+  CdkDragDrop,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
 } from '@angular/core';
 import {
   Observable,
+  take,
 } from 'rxjs';
 import {
   Task,
@@ -28,5 +33,9 @@ export class TaskListComponent {
 
   constructor(private taskService: TaskService) {
     this.tasks$ = this.taskService.filteredTasks$;
+  }
+
+  public drop(event: CdkDragDrop<string[]>) {
+    this.tasks$.pipe(take(1)).subscribe((tasks) => moveItemInArray(tasks, event.previousIndex, event.currentIndex));
   }
 }
