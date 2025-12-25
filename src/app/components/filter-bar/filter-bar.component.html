@@ -1,9 +1,11 @@
 <section class="filter-row">
   <p class="items-left remove-in-mobile">{{ itemsLeft$ | async }} items left</p>
-  <div *ngIf="selectedFilterData$ | async as filterData" class="filter-buttons">
-    <button class="filter-button" [class.selected]="filterData.all" (click)="setFilterStatus('all')">All</button>
-    <button class="filter-button" [class.selected]="filterData.active" (click)="setFilterStatus('active')">Active</button>
-    <button class="filter-button" [class.selected]="filterData.completed" (click)="setFilterStatus('completed')">Completed</button>
-  </div>
+  @if (selectedFilterData$ | async; as filterData) {
+    <div class="filter-buttons">
+      <button class="filter-button" [class.selected]="filterData.all" (click)="setFilterStatus('all')">All</button>
+      <button class="filter-button" [class.selected]="filterData.active" (click)="setFilterStatus('active')">Active</button>
+      <button class="filter-button" [class.selected]="filterData.completed" (click)="setFilterStatus('completed')">Completed</button>
+    </div>
+  }
   <button (click)="clearCompletedTasks()" class="clear-completed-button remove-in-mobile">Clear completed</button>
 </section>
