@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FilterBarComponent } from './filter-bar.component';
+import {
+ ComponentFixture, TestBed,
+} from '@angular/core/testing';
+import {
+ FilterBarComponent,
+} from './filter-bar.component';
 
 describe('FilterBarComponent', () => {
   let component: FilterBarComponent;
@@ -9,8 +12,7 @@ describe('FilterBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     imports: [FilterBarComponent]
-})
-    .compileComponents();
+  }).compileComponents();
 
     fixture = TestBed.createComponent(FilterBarComponent);
     component = fixture.componentInstance;

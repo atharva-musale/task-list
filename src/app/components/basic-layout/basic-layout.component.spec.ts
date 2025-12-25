@@ -13,8 +13,7 @@ describe('BasicLayoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     imports: [BasicLayoutComponent]
-})
-    .compileComponents();
+  }).compileComponents();
 
     fixture = TestBed.createComponent(BasicLayoutComponent);
     component = fixture.componentInstance;

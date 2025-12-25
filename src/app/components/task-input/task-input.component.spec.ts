@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TaskInputComponent } from './task-input.component';
+import {
+ ComponentFixture, TestBed,
+} from '@angular/core/testing';
+import {
+ TaskInputComponent,
+} from './task-input.component';
 
 describe('TaskInputComponent', () => {
   let component: TaskInputComponent;
@@ -9,8 +12,7 @@ describe('TaskInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     imports: [TaskInputComponent]
-})
-    .compileComponents();
+  }).compileComponents();
 
     fixture = TestBed.createComponent(TaskInputComponent);
     component = fixture.componentInstance;

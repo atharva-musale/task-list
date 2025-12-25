@@ -1,9 +1,12 @@
-import { 
+import {
+  CdkDrag,
   CdkDragDrop,
-  moveItemInArray,
   CdkDropList,
-  CdkDrag
+  moveItemInArray,
 } from '@angular/cdk/drag-drop';
+import {
+ AsyncPipe,
+} from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,9 +22,12 @@ import {
 import {
   TaskService,
 } from '../../services/task/task.service';
-import { TaskComponent } from '../task/task.component';
-import { FilterBarComponent } from '../filter-bar/filter-bar.component';
-import { AsyncPipe } from '@angular/common';
+import {
+ FilterBarComponent,
+} from '../filter-bar/filter-bar.component';
+import {
+ TaskComponent,
+} from '../task/task.component';
 
 @Component({
     selector: 'app-task-list',
@@ -41,6 +47,11 @@ export class TaskListComponent {
     this.tasks$ = this.taskService.filteredTasks$;
   }
 
+  /**
+   * Handles the drop event for reordering tasks
+   *
+   * @param event drop event
+   */
   public drop(event: CdkDragDrop<string[]>) {
     this.tasks$.pipe(take(1)).subscribe((tasks) => moveItemInArray(tasks, event.previousIndex, event.currentIndex));
   }

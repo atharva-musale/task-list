@@ -1,4 +1,7 @@
 import {
+ AsyncPipe,
+} from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
@@ -13,7 +16,6 @@ import {
 import {
  TaskService,
 } from '../../services';
-import { AsyncPipe } from '@angular/common';
 
 interface FilterSelectionData {
   all: boolean;
@@ -48,7 +50,7 @@ export class FilterBarComponent {
 
   constructor(private taskService: TaskService) {
     this.itemsLeft$ = this.taskService.numberOfActiveTasks$
-    this.selectedFilterData$ = this.taskService.filterState$.pipe(
+    this.selectedFilterData$ = this.taskService.selectedFilter$.pipe(
       map(filterState => ({
         all: filterState === FilterStatus.ALL,
         active: filterState === FilterStatus.ACTIVE,
@@ -57,10 +59,18 @@ export class FilterBarComponent {
     );
   }
 
+  /**
+   * Sets the filter status based on user selection
+   *
+   * @param filterBy selected filter
+   */
   public setFilterStatus(filterBy: string) {
     this.taskService.setFilterStatus(this.filterMapping[filterBy]);
   }
 
+  /**
+   * Clears completed tasks by removing them from the list
+   */
   public clearCompletedTasks() {
     this.taskService.clearCompletedTasks();
   }

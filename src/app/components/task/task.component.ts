@@ -16,11 +16,11 @@ import {
 } from '../../services';
 
 @Component({
-    selector: 'app-task',
-    templateUrl: './task.component.html',
-    styleUrls: ['./task.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-task',
+  templateUrl: './task.component.html',
+  styleUrls: ['./task.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskComponent {
   /**

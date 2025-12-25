@@ -51,6 +51,7 @@
         "@typescript-eslint/comma-dangle": ["error", { "imports": "always-multiline" }],
         "@angular-eslint/use-lifecycle-interface": "error",
         "@angular-eslint/use-pipe-transform-interface": "error",
+        "@angular-eslint/prefer-inject": "off",
         "@typescript-eslint/restrict-template-expressions": "warn",
         "@angular-eslint/directive-selector": [
           "error",

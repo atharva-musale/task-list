@@ -31,7 +31,6 @@ export class TaskService {
     { id: 5, title: 'Go for a walk', status: TaskStatus.ACTIVE },
     { id: 6, title: 'Call mom', status: TaskStatus.ACTIVE }
   ];
-  private taskLength = this.tasks.length;
 
   /**
    * To do operations on the tasks
@@ -39,8 +38,8 @@ export class TaskService {
   private tasksSubject$ = new BehaviorSubject<Task[]>(this.tasks);
 
   /** Current filter state */
-  private filterStateSubject$ = new BehaviorSubject<FilterStatus>(FilterStatus.ALL);
-  public filterState$ =this.filterStateSubject$.asObservable();
+  private selectedFilterSubject$ = new BehaviorSubject<FilterStatus>(FilterStatus.ALL);
+  public selectedFilter$ = this.selectedFilterSubject$.asObservable();
 
   /**
    * Filters tasks based on the state selected
@@ -53,7 +52,7 @@ export class TaskService {
   public numberOfActiveTasks$: Observable<Number>
 
   constructor() {
-    this.filteredTasks$ = combineLatest([this.tasksSubject$, this.filterStateSubject$]).pipe(
+    this.filteredTasks$ = combineLatest([this.tasksSubject$, this.selectedFilterSubject$]).pipe(
       map(([tasks, filterBy]) => getFilteredTasks(tasks, filterBy))
     );
 
@@ -103,10 +102,10 @@ export class TaskService {
   /**
    * Sets filtered state value
    *
-   * @param status new status
+   * @param selectedStatus new status
    */
-  public setFilterStatus(status: FilterStatus) {
-    this.filterStateSubject$.next(status);
+  public setFilterStatus(selectedStatus: FilterStatus) {
+    this.selectedFilterSubject$.next(selectedStatus);
   }
 
   /**
@@ -116,9 +115,8 @@ export class TaskService {
    * @returns task object
    */
   private createTask(taskTitle: string): Task {
-    this.taskLength++;
     return {
-      id: this.taskLength,
+      id: Date.now() + this.tasksSubject$.getValue().length,
       title: taskTitle,
       status: TaskStatus.ACTIVE
     };
