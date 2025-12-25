@@ -1,9 +1,13 @@
 import {
+ HttpClient,
+} from '@angular/common/http';
+import {
   Injectable,
 } from '@angular/core';
 import {
   BehaviorSubject,
   combineLatest,
+  firstValueFrom,
   map,
   Observable,
 } from 'rxjs';
@@ -12,6 +16,7 @@ import {
 } from '../../helpers';
 import {
   FilterStatus,
+  mockTasks,
   Task,
   TaskStatus,
 } from '../../models';
@@ -20,22 +25,7 @@ import {
   providedIn: 'root'
 })
 export class TaskService {
-  /**
-   * To store the tasks
-   */
-  private tasks: Task[] = [
-    { id: 1, title: 'Online JavaScript course', status: TaskStatus.ACTIVE },
-    { id: 2, title: 'Exercise', status: TaskStatus.COMPLETED },
-    { id: 3, title: 'Read for 1 hour', status: TaskStatus.ACTIVE },
-    { id: 4, title: 'Pick up groceries', status: TaskStatus.ACTIVE },
-    { id: 5, title: 'Go for a walk', status: TaskStatus.ACTIVE },
-    { id: 6, title: 'Call mom', status: TaskStatus.ACTIVE }
-  ];
-
-  /**
-   * To do operations on the tasks
-   */
-  private tasksSubject$ = new BehaviorSubject<Task[]>(this.tasks);
+  private readonly URL = 'http://localhost:5000/tasks';
 
   /** Current filter state */
   private selectedFilterSubject$ = new BehaviorSubject<FilterStatus>(FilterStatus.ALL);
@@ -44,20 +34,30 @@ export class TaskService {
   /**
    * Filters tasks based on the state selected
    */
-  public filteredTasks$: Observable<Task[]>
+  public filteredTasks$: Observable<Task[]>;
 
   /**
    * Number of active items
    */
-  public numberOfActiveTasks$: Observable<Number>
+  public numberOfActiveTasks$: Observable<number>
 
-  constructor() {
-    this.filteredTasks$ = combineLatest([this.tasksSubject$, this.selectedFilterSubject$]).pipe(
-      map(([tasks, filterBy]) => getFilteredTasks(tasks, filterBy))
+  /**
+   * Subject to hold tasks
+   */
+  private tasksSubject$ = new BehaviorSubject<Task[]>(mockTasks);
+
+  constructor(private http: HttpClient) {
+    this.getTasksFromServer();
+
+    this.filteredTasks$ = combineLatest([
+      this.tasksSubject$.asObservable(),
+      this.selectedFilter$
+    ]).pipe(
+      map(([tasks, selectedFilter]) => getFilteredTasks(tasks || [], selectedFilter))
     );
 
-    this.numberOfActiveTasks$ = this.tasksSubject$.pipe(
-      map(tasks => tasks.filter(task => task.status === TaskStatus.ACTIVE).length)
+    this.numberOfActiveTasks$ = this.tasksSubject$.asObservable().pipe(
+      map(tasks => tasks ? tasks.filter(task => task.status === TaskStatus.ACTIVE).length : 0)
     );
   }
 
@@ -66,9 +66,11 @@ export class TaskService {
    *
    * @param taskTitle title of the task to be added
    */
-  public addTask(taskTitle: string) {
-    this.tasks.push(this.createTask(taskTitle));
-    this.tasksSubject$.next(this.tasks);
+  public async addTask(taskTitle: string) {
+    const newTaskWithId = this.createTask(taskTitle);
+    const addedTask = await firstValueFrom(this.http.post<Task>(this.URL, newTaskWithId));
+    this.getTasksFromServer();
+    console.log('New task sussessfully added to server:', addedTask);
   }
 
   /**
@@ -76,17 +78,23 @@ export class TaskService {
    *
    * @param task task to be deleted
    */
-  public removeTask(task: Task) {
-    this.tasks = this.tasks.filter(t => t.id !== task.id);
-    this.tasksSubject$.next(this.tasks);
+  public async removeTask(task: Task) {
+    await firstValueFrom(this.http.delete(`${this.URL}/${task.id}`));
+    // this.getTasksFromServer();
+    console.log('Task successfully deleted from server:', task);
   }
 
   /**
    * Clears completed tasks
    */
-  public clearCompletedTasks() {
-    this.tasks = this.tasks.filter(task => task.status !== TaskStatus.COMPLETED);
-    this.tasksSubject$.next(this.tasks);
+  public async clearCompletedTasks() {
+    const completedTasks = this.tasksSubject$.getValue().filter(task => task.status === TaskStatus.COMPLETED);
+    const deleteRequests = completedTasks.map(task =>
+      this.http.delete(`${this.URL}/${task.id}`)
+    );
+    await Promise.all(deleteRequests.map(req => firstValueFrom(req)));
+    // this.getTasksFromServer();
+    console.log('Completed tasks successfully cleared from server');
   }
 
   /**
@@ -94,9 +102,10 @@ export class TaskService {
    *
    * @param task task to be set as completed
    */
-  public updateTaskStatus(task: Task, newStatus: TaskStatus) {
-    this.tasks = this.tasks.map(t => t.id === task.id ? { ...t, status: newStatus } : t);
-    this.tasksSubject$.next(this.tasks);
+  public async updateTaskStatus(task: Task, newStatus: TaskStatus) {
+    await firstValueFrom(this.http.patch(`${this.URL}/${task.id}`, { status: newStatus }));
+    this.getTasksFromServer();
+    console.log('Task status successfully updated on server:', task);
   }
 
   /**
@@ -116,9 +125,19 @@ export class TaskService {
    */
   private createTask(taskTitle: string): Task {
     return {
-      id: Date.now() + this.tasksSubject$.getValue().length,
+      id: Date.now() + (this.tasksSubject$.getValue()?.length || 0),
       title: taskTitle,
       status: TaskStatus.ACTIVE
     };
+  }
+
+  private async getTasksFromServer() {
+    try {
+      const tasks = await firstValueFrom(this.http.get<Task[]>(this.URL));
+      this.tasksSubject$.next(tasks);
+    } catch (error) {
+      console.error('Error fetching tasks from server, falling back to mock data.', error);
+      this.tasksSubject$.next(mockTasks);
+    }
   }
 }
