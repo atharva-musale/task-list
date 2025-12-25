@@ -3,7 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicLayoutComponent } from './components/basic-layout/basic-layout.component';
+import {
+ BasicLayoutComponent,
+} from './components/basic-layout/basic-layout.component';
 
 @Component({
   selector: 'app-root',
