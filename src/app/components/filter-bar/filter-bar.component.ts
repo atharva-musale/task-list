@@ -13,6 +13,7 @@ import {
 import {
  TaskService,
 } from '../../services';
+import { AsyncPipe } from '@angular/common';
 
 interface FilterSelectionData {
   all: boolean;
@@ -21,12 +22,12 @@ interface FilterSelectionData {
 }
 
 @Component({
-  selector: 'app-filter-bar',
-  templateUrl: './filter-bar.component.html',
-  styleUrls: ['./filter-bar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: false
+    selector: 'app-filter-bar',
+    templateUrl: './filter-bar.component.html',
+    styleUrls: ['./filter-bar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [AsyncPipe]
 })
 export class FilterBarComponent {
   /**

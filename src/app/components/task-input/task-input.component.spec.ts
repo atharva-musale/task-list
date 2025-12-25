@@ -8,8 +8,8 @@ describe('TaskInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaskInputComponent ]
-    })
+    imports: [TaskInputComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(TaskInputComponent);

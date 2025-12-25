@@ -6,14 +6,15 @@ import {
 import {
  TaskService,
 } from '../../services';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-task-input',
-  templateUrl: './task-input.component.html',
-  styleUrls: ['./task-input.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+    selector: 'app-task-input',
+    templateUrl: './task-input.component.html',
+    styleUrls: ['./task-input.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [FormsModule]
 })
 export class TaskInputComponent {
   /**

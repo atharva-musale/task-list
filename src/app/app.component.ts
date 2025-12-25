@@ -3,6 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { BasicLayoutComponent } from './components/basic-layout/basic-layout.component';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,6 @@ import {
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false
+  imports: [BasicLayoutComponent]
 })
-export class AppComponent {
-  title = 'task-list';
-}
+export class AppComponent {}

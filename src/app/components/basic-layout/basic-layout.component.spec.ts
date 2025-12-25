@@ -12,8 +12,8 @@ describe('BasicLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BasicLayoutComponent ]
-    })
+    imports: [BasicLayoutComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(BasicLayoutComponent);
