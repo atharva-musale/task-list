@@ -20,7 +20,8 @@ import {
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TaskComponent {
   /**

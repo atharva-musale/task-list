@@ -9,7 +9,8 @@ import {
   templateUrl: './basic-layout.component.html',
   styleUrls: ['./basic-layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class BasicLayoutComponent {
 
